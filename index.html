@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Private Data</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .login-box h1 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+        .login-box p {
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+        }
+        .login-box input:focus {
+            border-color: #667eea;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .login-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        #appScreen {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .header h2 {
+            color: #333;
+            font-size: 22px;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5a6fd6; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-success:hover { background: #219a52; }
+        .btn-secondary { background: #95a5a6; color: white; }
+        .btn-secondary:hover { background: #7f8c8d; }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #f8f9fa;
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #333;
+        }
+        tr:hover td {
+            background: #f8f9ff;
+        }
+        td[contenteditable="true"] {
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+            padding: 8px 10px;
+            margin: -4px -10px;
+            min-width: 60px;
+        }
+        td[contenteditable="true"]:hover {
+            background: #eef1ff;
+        }
+        td[contenteditable="true"]:focus {
+            background: #e8ecff;
+            box-shadow: 0 0 0 2px #667eea33;
+        }
+        .actions-cell {
+            white-space: nowrap;
+        }
+        .delete-row-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .delete-row-btn:hover {
+            background: #c0392b;
+        }
+
+        .status-bar {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            font-size: 13px;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .saving-indicator {
+            color: #667eea;
+            font-weight: 600;
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #888;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+        }
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 600px) {
+            .login-box { padding: 25px; }
+            #appScreen { padding: 10px; }
+            th, td { padding: 8px 10px; font-size: 13px; }
+            .header h2 { font-size: 18px; }
+            .btn { padding: 8px 14px; font-size: 13px; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+    <div class="login-box">
+        <h1>🔐 Private Data</h1>
+        <p>Enter passcode to access</p>
+        <input type="password" id="passwordInput" placeholder="Enter passcode" autocomplete="off">
+        <button onclick="checkPassword()">Unlock</button>
+        <p class="error-msg" id="errorMsg">❌ Wrong passcode!</p>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="appScreen">
+    <div class="header">
+        <h2>📊 My Data Sheet</h2>
+        <div class="header-buttons">
+            <button class="btn btn-success" onclick="addRow()">+ Add Row</button>
+            <button class="btn btn-secondary" onclick="reloadData()">🔄 Refresh</button>
+            <button class="btn btn-danger" onclick="lockScreen()">🔒 Lock</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div id="tableArea">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading data...</p>
+            </div>
+        </div>
+        <div class="status-bar">
+            <span id="rowCount">0 rows</span>
+            <span class="saving-indicator" id="savingIndicator">Saving...</span>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// 👇 CONFIGURATION - YAHAN 2 LINE EDIT KARNA HAI
+// ============================================================
+
+// Line 1: Apna Google Apps Script Web App URL paste karo
+// (Step 1 me jo URL copy kiya tha woh yahan paste karo)
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzR1v_lWsCIpVUNOCL2YlgzjJ0PELlxbAkpXVP0Ag_kbLLou6QQ1SUeq2t5NhtOMka_/exec';
+
+// Line 2: Apna passcode set karo (jaise 'raj@123' ya 'hello2024')
+var CORRECT_PASSWORD = 'mypass123';
+
+// ============================================================
+// PASSWORD LOGIC
+// ============================================================
+function checkPassword() {
+    var input = document.getElementById('passwordInput').value;
+    var error = document.getElementById('errorMsg');
+
+    if (input === CORRECT_PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
+        loadData();
+    } else {
+        error.style.display = 'block';
+        input.value = '';
+        input.focus();
+        error.style.animation = 'none';
+        error.offsetHeight;
+        error.style.animation = 'shake 0.4s ease';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+});
+
+function lockScreen() {
+    document.getElementById('appScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('passwordInput').value = '';
+}
+
+// ============================================================
+// DATA OPERATIONS
+// ============================================================
+var currentData = [];
+var saveTimeout = null;
+var columnHeaders = [];
+
+function loadData() {
+    var tableArea = document.getElementById('tableArea');
+    tableArea.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading data...</p></div>';
+
+    fetch(APPS_SCRIPT_URL + '?action=read')
+        .then(function(response) { return response.json(); })
+        .then(function(result) {
+            if (result.status === 'error') {
+                tableArea.innerHTML = '<div class="empty-state"><p>⚠️ Error: ' + result.message + '</p></div>';
+                return;
+            }
+            currentData = result.data;
+            columnHeaders = result.headers || [];
+            renderTable(currentData);
+        })
+        .catch(function(error) {
+            tableArea.innerHTML = '<div class="empty-state"><p>⚠️ Failed to load data. Check your connection.</p></div>';
+        });
+}
+
+function renderTable(data) {
+    var tableArea = document.getElementById('tableArea');
+
+    if (!data || data.length === 0) {
+        tableArea.innerHTML = '<div class="empty-state"><p>No data yet. Click "Add Row" to start.</p></div>';
+        document.getElementById('rowCount').textContent = '0 rows';
+        return;
+    }
+
+    var headers = columnHeaders.length > 0 ? columnHeaders : Object.keys(data[0]);
+    var keys = Object.keys(data[0]);
+
+    var html = '<table><thead><tr>';
+    for (var h = 0; h < headers.length; h++) {
+        html += '<th>' + escapeHtml(headers[h]) + '</th>';
+    }
+    html += '<th style="width:80px">Action</th></tr></thead><tbody>';
+
+    for (var i = 0; i < data.length; i++) {
+        html += '<tr>';
+        for (var k = 0; k < keys.length; k++) {
+            html += '<td contenteditable="true" data-row="' + i + '" data-key="' + keys[k] + '" onblur="cellEdited(this)">' + escapeHtml(data[i][keys[k]] || '') + '</td>';
+        }
+        html += '<td class="actions-cell"><button class="delete-row-btn" onclick="deleteRow(' + i + ')">Delete</button></td>';
+        html += '</tr>';
+    }
+
+    html += '</tbody></table>';
+    tableArea.innerHTML = html;
+    document.getElementById('rowCount').textContent = data.length + ' rows';
+}
+
+function cellEdited(cell) {
+    var rowIndex = parseInt(cell.dataset.row);
+    var key = cell.dataset.key;
+    var newValue = cell.textContent;
+
+    currentData[rowIndex][key] = newValue;
+
+    var indicator = document.getElementById('savingIndicator');
+    indicator.style.display = 'inline';
+
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(function() {
+        saveData();
+        indicator.style.display = 'none';
+    }, 800);
+}
+
+function saveData() {
+    fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'write', data: currentData })
+    })
+    .then(function(response) { return response.json(); })
+    .then(function(result) {
+        if (result.status === 'error') {
+            alert('Save failed: ' + result.message);
+        }
+    })
+    .catch(function(error) {
+        alert('Failed to save data. Please try again.');
+    });
+}
+
+function addRow() {
+    if (!currentData || currentData.length === 0) {
+        fetch(APPS_SCRIPT_URL + '?action=read')
+            .then(function(r) { return r.json(); })
+            .then(function(result) {
+                currentData = result.data;
+                columnHeaders = result.headers || [];
+                insertNewRow();
+            })
+            .catch(function() {
+                alert('Cannot add row. Please refresh the page.');
+            });
+        return;
+    }
+    insertNewRow();
+}
+
+function insertNewRow() {
+    var keys;
+    if (currentData.length > 0) {
+        keys = Object.keys(currentData[0]);
+    } else if (columnHeaders.length > 0) {
+        keys = columnHeaders;
+    } else {
+        keys = ['Column1'];
+    }
+
+    var newRow = {};
+    for (var k = 0; k < keys.length; k++) {
+        newRow[keys[k]] = '';
+    }
+
+    currentData.push(newRow);
+    renderTable(currentData);
+    saveData();
+
+    setTimeout(function() {
+        var cells = document.querySelectorAll('td[contenteditable]');
+        if (cells.length >= keys.length) {
+            cells[cells.length - keys.length].focus();
+        }
+    }, 100);
+}
+
+function deleteRow(index) {
+    if (!confirm('Are you sure you want to delete this row?')) return;
+    currentData.splice(index, 1);
+    renderTable(currentData);
+    saveData();
+}
+
+function reloadData() {
+    loadData();
+}
+
+function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+</script>
+
+</body>
+</html>
