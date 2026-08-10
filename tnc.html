@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Foxzen Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            line-height: 1.8;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00d26a 0%, #00b368 100%);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #00d26a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .tnc-section {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tnc-section h2 {
+            color: #00d26a;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tnc-section h3 {
+            color: #ffffff;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tnc-section p,
+        .tnc-section li {
+            color: #ccc;
+            font-size: 1.05em;
+            margin-bottom: 12px;
+        }
+
+        .tnc-section ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .tnc-section li {
+            margin-bottom: 10px;
+        }
+
+        .warranty-box {
+            background: rgba(0, 210, 106, 0.1);
+            border-left: 4px solid #00d26a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .warranty-box h3 {
+            color: #00d26a;
+            margin-bottom: 15px;
+        }
+
+        .warranty-box .calc {
+            background: #0a0a0f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            color: #00d26a;
+            font-size: 1em;
+        }
+
+        .language-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .language-toggle button {
+            background: #1a1a2e;
+            color: #ffffff;
+            border: 2px solid #00d26a;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle button.active {
+            background: #00d26a;
+            color: #ffffff;
+        }
+
+        .language-toggle button:hover {
+            background: #00d26a;
+            color: #ffffff;
+        }
+
+        footer {
+            background: #0a0a0f;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+            border-top: 1px solid #1a1a2e;
+        }
+
+        footer a {
+            color: #00d26a;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Terms & Conditions</h1>
+        <p>Foxzen Digital - Please read carefully before purchasing</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Store</a>
+
+        <div class="language-toggle">
+            <button id="btnEnglish" class="active" onclick="switchLanguage('english')">English</button>
+            <button id="btnHindi" onclick="switchLanguage('hindi')">हिंदी</button>
+        </div>
+
+        <!-- English Content -->
+        <div id="englishContent">
+            <div class="tnc-section">
+                <h2>📜 General Terms & Conditions</h2>
+
+                <h3>1. Language Preference</h3>
+                <p>We offer our services and support in both <strong>English</strong> and <strong>Hindi</strong>. You can communicate with us in either language for purchases, support, or queries. Our team is fluent in both languages to ensure clear communication and a smooth experience.</p>
+
+                <h3>2. Value for Money Warranty</h3>
+                <p>We believe in providing genuine value to our customers. Our "Value for Money Warranty" ensures you get fair usage based on the official price of any product.</p>
+
+                <div class="warranty-box">
+                    <h3>How It Works:</h3>
+                    <p>If you purchase a subscription at a discounted price, your warranty period is calculated proportionally based on the official monthly price.</p>
+
+                    <div class="calc">
+                        <strong>Example:</strong><br>
+                        Official Price: ₹5000/month<br>
+                        Your Price: ₹500<br>
+                        Daily Official Rate: ₹5000 ÷ 30 days = ₹166.67/day<br>
+                        Your Warranty Period: ₹500 ÷ ₹166.67 = <strong>3 Days</strong>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>What This Means:</strong> If a product you purchased for ₹500 stops working within 3 days of purchase, we will replace or refund it. The warranty period scales with your purchase price.</p>
+                </div>
+
+                <h3>3. Product Authenticity</h3>
+                <p>All products sold are genuine licenses or legitimate subscriptions. We do not sell pirated or cracked software.</p>
+
+                <h3>4. Delivery & Activation</h3>
+                <ul>
+                    <li>Most digital products are delivered within <strong>1–24 hours</strong> after payment confirmation.</li>
+                    <li>Some products may take up to <strong>48 hours</strong> depending on availability.</li>
+                    <li>Activation instructions will be provided along with the product.</li>
+                </ul>
+
+                <h3>5. Refund Policy</h3>
+                <ul>
+                    <li>Refunds are available only if the product fails within the warranty period.</li>
+                    <li>No refunds after successful activation and usage.</li>
+                    <li>Refund requests must be made within the warranty period via WhatsApp.</li>
+                </ul>
+
+                <h3>6. Account & Login Details</h3>
+                <p>For account-based services (like Canva Admin Panel, Spotify, etc.), credentials will be shared securely. Do not change passwords or account details. Any misuse may result in service termination without refund.</p>
+
+                <h3>7. Support</h3>
+                <p>We provide support for installation, activation, and troubleshooting. Contact us on WhatsApp at <strong>+91 8081031163</strong>.</p>
+
+                <h3>8. Changes to Terms</h3>
+                <p>Foxzen Digital reserves the right to update these terms at any time. Continued use of our services constitutes acceptance of updated terms.</p>
+
+                <p style="margin-top: 30px; color: #00d26a; font-weight: 600;">By purchasing from Foxzen Digital, you agree to all the terms mentioned above.</p>
+            </div>
+        </div>
+
+        <!-- Hindi Content -->
+        <div id="hindiContent" class="hidden">
+            <div class="tnc-section">
+                <h2>📜 नियम एवं शर्तें</h2>
+
+                <h3>1. भाषा विकल्प</h3>
+                <p>हम हिंदी और अंग्रेजी दोनों भाषाओं में सेवाएं और सहायता प्रदान करते हैं। आप खरीदारी, सहायता या प्रश्नों के लिए किसी भी भाषा में हमसे संवाद कर सकते हैं। हमारी टीम स्पष्ट संचार और सुचारु अनुभव सुनिश्चित करने के लिए दोनों भाषाओं में फ्लuent है।</p>
+
+                <h3>2. वैल्यू फॉर मनी वारंटी</h3>
+                <p>हम अपने ग्राहकों को वास्तविक मूल्य प्रदान करने में विश्वास रखते हैं। हमारी "वैल्यू फॉर मनी वारंटी" यह सुनिश्चित करती है कि आपको किसी भी उत्पाद के आधिकारिक मूल्य के आधार पर उचित उपयोग मिलता है।</p>
+
+                <div class="warranty-box">
+                    <h3>यह कैसे काम करता है:</h3>
+                    <p>यदि आप छूट दर पर सब्सक्रिप्शन खरीदते हैं, तो आपकी वारंटी की अवधि आधिकारिक मासिक मूल्य के आधार पर अनुपातिक रूप से गणना की जाती है।</p>
+
+                    <div class="calc">
+                        <strong>उदाहरण:</strong><br>
+                        आधिकारिक मूल्य: ₹5000/माह<br>
+                        आपका किराया: ₹500<br>
+                        दैनिक आधिकारिक दर: ₹5000 ÷ 30 दिन = ₹166.67/दिन<br>
+                        आपकी वारंटी अवधि: ₹500 ÷ ₹166.67 = <strong>3 दिन</strong>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>इसका मतलब:</strong> यदि आपके द्वारा ₹500 में खरीदा गया कोई उत्पाद खरीद के 3 दिन के भीतर काम करना बंद कर देता है, तो हम इसे बदल देंगे या धन वापस करेंगे। वारंटी की अवधि आपकी खरीद की कीमत के साथ स्केल होती है।</p>
+                </div>
+
+                <h3>3. उत्पाद की वास्तविकता</h3>
+                <p>हमसे बिक्री होने वाले सभी उत्पाद वास्तविक लाइसेंस या वैध सब्सक्रिप्शन हैं। हम पाइरेटेड या क्रैक्ड सॉफ्टवेयर नहीं बेचते हैं।</p>
+
+                <h3>4. डिलीवरी एवं एक्टिवेशन</h3>
+                <ul>
+                    <li>अधिकांश डिजिटल उत्पाद भुगतान पुष्टि के बाद <strong>1–24 घंटे</strong> के भीतर दिए जाते हैं।</li>
+                    <li>कुछ उत्पादों को उपलब्धता के आधार पर <strong>48 घंटे</strong> तक लग सकता है।</li>
+                    <li>उत्पाद के साथ एक्टिवेशन की निर्देश दिए जाएंगे।</li>
+                </ul>
+
+                <h3>5. धन वापसी नीति</h3>
+                <ul>
+                    <li>रिफंड केवल तभी उपलब्ध है जब कोई उत्पाद वारंटी अवधि के भीतर विफल हो जाए।</li>
+                    <li>सफल एक्टिवेशन और उपयोग के बाद कोई रिफंड नहीं।</li>
+                    <li>रिफंड अनुरोध वारंटी अवधि के भीतर WhatsApp के माध्यम से किए जाना चाहिए।</li>
+                </ul>
+
+                <h3>6. खाता एवं लॉगिन विवरण</h3>
+                <p>खाता-आधारित सेवाओं (जैसे Canva एडमिन पैनल, स्पॉटिफाई आदि) के लिए, क्रेडेंशियल्स सुरक्षित रूप से साझा किए जाएंगे। पासवर्ड या खाता विवरण न बदलें। किसी भी दुरुपयोग के परिणामस्वरूप बिना रिफंड के सेवा समाप्त हो सकती है।</p>
+
+                <h3>7. सहायता</h3>
+                <p>हम स्थापना, एक्टिवेशन और समस्या निवारण के लिए सहायता प्रदान करते हैं। WhatsApp पर <strong>+91 8081031163</strong> पर हमसे संपर्क करें।</p>
+
+                <h3>8. नियमों में परिवर्तन</h3>
+                <p>Foxzen Digital किसी भी समय इन नियमों को अपडेट करने का अधिकार सुरक्षित रखता है। हमारी सेवाओं का लगातार उपयोग अपडेट किए गए नियमों की स्वीकृति माना जाता है।</p>
+
+                <p style="margin-top: 30px; color: #00d26a; font-weight: 600;">Foxzen Digital से खरीद करके आप उपरोक्त सभी शर्तों से सहमत होते हैं।</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p> © 2026 <a href="index.html">Foxzen Digital</a> | All products are genuine licenses | Secure transactions</p>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const englishContent = document.getElementById("englishContent");
+            const hindiContent = document.getElementById("hindiContent");
+            const btnEnglish = document.getElementById("btnEnglish");
+            const btnHindi = document.getElementById("btnHindi");
+
+            if (lang === "english") {
+                englishContent.classList.remove("hidden");
+                hindiContent.classList.add("hidden");
+                btnEnglish.classList.add("active");
+                btnHindi.classList.remove("active");
+            } else {
+                englishContent.classList.add("hidden");
+                hindiContent.classList.remove("hidden");
+                btnHindi.classList.add("active");
+                btnEnglish.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
