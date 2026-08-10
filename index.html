@@ -3,473 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Private Data</title>
+    <title>Foxzen Digital - Premium Software & Subscriptions</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
+            background: #0a0a0f;
+            color: #ffffff;
         }
 
-        #loginScreen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        header {
+            background: linear-gradient(135deg, #00d26a 0%, #00b368 100%);
+            padding: 40px 20px;
             text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-        .login-box h1 {
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 24px;
-        }
-        .login-box p {
-            color: #888;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s;
-            margin-bottom: 15px;
-        }
-        .login-box input:focus {
-            border-color: #667eea;
-        }
-        .login-box button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .login-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        .error-msg {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        #appScreen {
-            display: none;
-            max-width: 1000px;
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            background: #1a1a2e;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            outline: none;
+        }
+
+        .search-box input::placeholder {
+            color: #888;
+        }
+
+        .search-box input:focus {
+            box-shadow: 0 4px 20px rgba(0, 210, 106, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .header h2 {
-            color: #333;
-            font-size: 22px;
-        }
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .btn-primary { background: #667eea; color: white; }
-        .btn-primary:hover { background: #5a6fd6; }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-danger:hover { background: #c0392b; }
-        .btn-success { background: #27ae60; color: white; }
-        .btn-success:hover { background: #219a52; }
-        .btn-secondary { background: #95a5a6; color: white; }
-        .btn-secondary:hover { background: #7f8c8d; }
 
-        .table-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th {
-            background: #f8f9fa;
-            padding: 14px;
-            text-align: left;
-            font-weight: 600;
-            color: #555;
-            border-bottom: 2px solid #e0e0e0;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        td {
-            padding: 12px 14px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
-            color: #333;
-        }
-        tr:hover td {
-            background: #f8f9ff;
-        }
-        td[contenteditable="true"] {
-            cursor: pointer;
-            outline: none;
-            border-radius: 4px;
-            padding: 8px 10px;
-            margin: -4px -10px;
-            min-width: 60px;
-        }
-        td[contenteditable="true"]:hover {
-            background: #eef1ff;
-        }
-        td[contenteditable="true"]:focus {
-            background: #e8ecff;
-            box-shadow: 0 0 0 2px #667eea33;
-        }
-        .actions-cell {
-            white-space: nowrap;
-        }
-        .delete-row-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .delete-row-btn:hover {
-            background: #c0392b;
-        }
-
-        .status-bar {
-            padding: 12px 16px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-            font-size: 13px;
-            color: #888;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .saving-indicator {
-            color: #667eea;
-            font-weight: 600;
-            display: none;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: #888;
-        }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #e0e0e0;
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 15px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .empty-state {
+        .no-results {
             text-align: center;
             padding: 60px 20px;
+            color: #888;
+            font-size: 1.2em;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 210, 106, 0.3);
+        }
+
+        .product-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-description {
+            color: #aaa;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00d26a;
+            margin-bottom: 20px;
+        }
+
+        .product-price .currency {
+            font-size: 0.6em;
             color: #aaa;
         }
-        .empty-state svg {
-            width: 80px;
-            height: 80px;
+
+        .dm-button {
+            background: linear-gradient(135deg, #00d26a 0%, #00b368 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 210, 106, 0.3);
+        }
+
+        .dm-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 210, 106, 0.5);
+        }
+
+        .dm-button::before {
+            content: "💬 ";
+        }
+
+        .contact-info {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            padding: 30px;
+            text-align: center;
+            margin: 40px 20px;
+            border-radius: 15px;
+            border: 2px solid #00d26a;
+        }
+
+        .contact-info h2 {
+            color: #00d26a;
             margin-bottom: 15px;
-            opacity: 0.4;
+            font-size: 1.8em;
         }
 
-        @media (max-width: 600px) {
-            .login-box { padding: 25px; }
-            #appScreen { padding: 10px; }
-            th, td { padding: 8px 10px; font-size: 13px; }
-            .header h2 { font-size: 18px; }
-            .btn { padding: 8px 14px; font-size: 13px; }
+        .contact-info p {
+            color: #aaa;
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+        .contact-info .phone {
+            font-size: 2em;
+            color: #ffffff;
+            font-weight: bold;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        footer {
+            background: #0a0a0f;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+            border-top: 1px solid #1a1a2e;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info .phone {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Foxzen Digital</h1>
+        <p>Premium Software & Subscriptions at Best Prices</p>
+    </header>
 
-<!-- LOGIN SCREEN -->
-<div id="loginScreen">
-    <div class="login-box">
-        <h1>🔐 Private Data</h1>
-        <p>Enter passcode to access</p>
-        <input type="password" id="passwordInput" placeholder="Enter passcode" autocomplete="off">
-        <button onclick="checkPassword()">Unlock</button>
-        <p class="error-msg" id="errorMsg">❌ Wrong passcode!</p>
-    </div>
-</div>
-
-<!-- MAIN APP -->
-<div id="appScreen">
-    <div class="header">
-        <h2>📊 My Data Sheet</h2>
-        <div class="header-buttons">
-            <button class="btn btn-success" onclick="addRow()">+ Add Row</button>
-            <button class="btn btn-secondary" onclick="reloadData()">🔄 Refresh</button>
-            <button class="btn btn-danger" onclick="lockScreen()">🔒 Lock</button>
+    <div class="search-container">
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search products..."
+                autocomplete="off"
+            >
         </div>
     </div>
 
-    <div class="table-container">
-        <div id="tableArea">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Loading data...</p>
-            </div>
-        </div>
-        <div class="status-bar">
-            <span id="rowCount">0 rows</span>
-            <span class="saving-indicator" id="savingIndicator">Saving...</span>
+    <div class="container">
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="no-results" id="noResults" style="display: none;">
+            No products found matching your search.
         </div>
     </div>
-</div>
 
-<script>
-// ============================================================
-// 👇 CONFIGURATION - YAHAN 2 LINE EDIT KARNA HAI
-// ============================================================
+    <div class="container">
+        <div class="contact-info">
+            <h2>📞 Contact Us to Purchase</h2>
+            <p>Click any "DM to Buy" button or message us directly on WhatsApp</p>
+            <div class="phone">+91 8081031163</div>
+            <p style="color: #667eea; margin-top: 15px;">We're here to help you 24/7!</p>
+        </div>
+    </div>
 
-// Line 1: Apna Google Apps Script Web App URL paste karo
-// (Step 1 me jo URL copy kiya tha woh yahan paste karo)
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwI-TJqEeKorE8kVxWu-_IEttJnPgHMrAlWIoOtsGS-S6Uu7A8eubqmk648mEylptkvVg/exec';
+    <footer>
+        <p> Foxzen Digital | All products are genuine licenses | Secure transactions</p>
+    </footer>
 
-// Line 2: Apna passcode set karo (jaise 'raj@123' ya 'hello2024')
-var CORRECT_PASSWORD = 'mypass123';
+    <script>
+        const products = [
+            { name: "Microsoft Office 365", description: "1 Year Subscription | Official Price: ₹8890", price: "₹650", period: "1 Year" },
+            { name: "Claude API", description: "Max Plan Access", price: "₹4500", period: "" },
+            { name: "CapCut Pro", description: "Premium Video Editing", price: "₹450", period: "per month" },
+            { name: "LinkedIn Premium - Career", description: "Career Plan with Advanced Features", price: "₹1400", period: "2 Months" },
+            { name: "LinkedIn Premium - Business", description: "Business Plan with Advanced Features", price: "₹1600", period: "2 Months" },
+            { name: "Google Drive Storage", description: "5 TB Cloud Storage", price: "₹1999", period: "18 Months" },
+            { name: "Zoom Premium", description: "Up to 100 Participants", price: "₹700", period: "1 Month" },
+            { name: "TradingView", description: "Premium Charting & Analysis", price: "₹1449", period: "1 Month" },
+            { name: "Grammarly Premium", description: "AI Writing Assistant", price: "₹399", period: "1 Month" },
+            { name: "Grammarly Premium", description: "AI Writing Assistant", price: "₹2200", period: "1 Year" },
+            { name: "QuillBot Premium", description: "AI Paraphrasing & Writing Tool", price: "₹350", period: "1 Month" },
+            { name: "ChatGPT Plus", description: "OpenAI Premium Access", price: "DM for Price", period: "" },
+            { name: "Google Gemini Pro", description: "Advanced AI Assistant", price: "₹1999", period: "18 Months" },
+            { name: "Canva Edu Pro", description: "Education Plan - All Features", price: "₹249", period: "1 Year" },
+            { name: "Canva Pro Original", description: "Full Canva Pro Access", price: "₹1499", period: "1 Year" },
+            { name: "Filmora", description: "Video Editing Software + 2000 AI Credits", price: "₹1699", period: "1 Year" },
+            { name: "Adobe Creative Cloud", description: "All Adobe Apps - 30 Day Warranty", price: "₹750", period: "per month" },
+            { name: "CorelDRAW License", description: "Lifetime License | Mac/Windows", price: "₹1999", period: "Lifetime" },
+            { name: "Windows 10/11 OEM", description: "Original License Key", price: "₹499", period: "Lifetime" },
+            { name: "Envato Unlimited", description: "Unlimited Downloads - All Assets", price: "₹750", period: "per month" },
+            { name: "Spotify Premium", description: "Works Worldwide", price: "₹999", period: "1 Year" },
+            { name: "Prime Video", description: "Amazon Prime Video Access", price: "₹80", period: "per month" },
+            { name: "ZEE5 Premium", description: "Indian Streaming Platform", price: "₹499", period: "1 Year" },
+            { name: "SonyLIV Premium", description: "Indian Streaming Platform", price: "₹650", period: "1 Year" },
+            { name: "GitHub Student Developer", description: "Student Developer Pack", price: "₹1999", period: "2 Years" },
+            { name: "HeyGen", description: "AI Video Generation", price: "DM for Price", period: "" },
+            { name: "ElevenLabs", description: "AI Voice Generation", price: "DM for Price", period: "" },
+            { name: "Lovable", description: "AI Development Platform", price: "DM for Price", period: "" },
+            { name: "Bolt", description: "AI Development Platform", price: "DM for Price", period: "" },
+            { name: "Emergent", description: "AI Platform", price: "DM for Price", period: "" },
+            { name: "Headshot Pro", description: "AI Professional Headshots", price: "DM for Price", period: "" },
+            { name: "Surfshark VPN", description: "Premium VPN Service", price: "DM for Price", period: "" },
+            { name: "Manus Pro", description: "AI Assistant Platform", price: "DM for Price", period: "" },
+            { name: "Railways Hobby", description: "Railway Management", price: "DM for Price", period: "" },
+            { name: "Runway Pro", description: "AI Video Editing & Generation", price: "DM for Price", period: "" },
+            { name: "Replit", description: "Online IDE & Hosting", price: "DM for Price", period: "" },
+            { name: "Warp", description: "AI Terminal", price: "DM for Price", period: "" },
+            { name: "Gamma", description: "AI Presentation & Design", price: "DM for Price", period: "" },
+            { name: "Wispr Flow Pro", description: "AI Voice Dictation", price: "DM for Price", period: "" },
+            { name: "Cursor Pro", description: "AI Code Editor", price: "DM for Price", period: "" },
+            { name: "Mobbin (10 Seats)", description: "UI/UX Design Reference", price: "DM for Price", period: "1 Year" },
+            { name: "Descripts", description: "AI Video & Audio Editing", price: "DM for Price", period: "" },
+            { name: "YouTube Premium", description: "Ad-Free YouTube Experience", price: "₹1300", period: "1 Year" },
+            { name: "IPTV Service", description: "Live TV Channels", price: "₹3600", period: "1 Year" },
+            { name: "NordVPN", description: "Premium VPN Service", price: "₹699", period: "3 Months" },
+            { name: "Canva Admin Panel", description: "Admin Access - 1 Year Warranty", price: "₹2999", period: "1 Year" },
+            { name: "Outlook Mail", description: "Lifetime Email Access", price: "₹49", period: "Lifetime" }
+        ];
 
-// ============================================================
-// PASSWORD LOGIC
-// ============================================================
-function checkPassword() {
-    var input = document.getElementById('passwordInput').value;
-    var error = document.getElementById('errorMsg');
+        const phoneNumber = "918081031163";
+        const grid = document.getElementById("productsGrid");
+        const noResults = document.getElementById("noResults");
+        const searchInput = document.getElementById("searchInput");
 
-    if (input === CORRECT_PASSWORD) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appScreen').style.display = 'block';
-        loadData();
-    } else {
-        error.style.display = 'block';
-        input.value = '';
-        input.focus();
-        error.style.animation = 'none';
-        error.offsetHeight;
-        error.style.animation = 'shake 0.4s ease';
-    }
-}
+        function renderProducts(productsToRender) {
+            grid.innerHTML = "";
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') checkPassword();
-    });
-});
-
-function lockScreen() {
-    document.getElementById('appScreen').style.display = 'none';
-    document.getElementById('loginScreen').style.display = 'flex';
-    document.getElementById('passwordInput').value = '';
-}
-
-// ============================================================
-// DATA OPERATIONS
-// ============================================================
-var currentData = [];
-var saveTimeout = null;
-var columnHeaders = [];
-
-function loadData() {
-    var tableArea = document.getElementById('tableArea');
-    tableArea.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading data...</p></div>';
-
-    fetch(APPS_SCRIPT_URL + '?action=read')
-        .then(function(response) { return response.json(); })
-        .then(function(result) {
-            if (result.status === 'error') {
-                tableArea.innerHTML = '<div class="empty-state"><p>⚠️ Error: ' + result.message + '</p></div>';
+            if (productsToRender.length === 0) {
+                noResults.style.display = "block";
                 return;
             }
-            currentData = result.data;
-            columnHeaders = result.headers || [];
-            renderTable(currentData);
-        })
-        .catch(function(error) {
-            tableArea.innerHTML = '<div class="empty-state"><p>⚠️ Failed to load data. Check your connection.</p></div>';
-        });
-}
 
-function renderTable(data) {
-    var tableArea = document.getElementById('tableArea');
+            noResults.style.display = "none";
 
-    if (!data || data.length === 0) {
-        tableArea.innerHTML = '<div class="empty-state"><p>No data yet. Click "Add Row" to start.</p></div>';
-        document.getElementById('rowCount').textContent = '0 rows';
-        return;
-    }
-
-    var headers = columnHeaders.length > 0 ? columnHeaders : Object.keys(data[0]);
-    var keys = Object.keys(data[0]);
-
-    var html = '<table><thead><tr>';
-    for (var h = 0; h < headers.length; h++) {
-        html += '<th>' + escapeHtml(headers[h]) + '</th>';
-    }
-    html += '<th style="width:80px">Action</th></tr></thead><tbody>';
-
-    for (var i = 0; i < data.length; i++) {
-        html += '<tr>';
-        for (var k = 0; k < keys.length; k++) {
-            html += '<td contenteditable="true" data-row="' + i + '" data-key="' + keys[k] + '" onblur="cellEdited(this)">' + escapeHtml(data[i][keys[k]] || '') + '</td>';
-        }
-        html += '<td class="actions-cell"><button class="delete-row-btn" onclick="deleteRow(' + i + ')">Delete</button></td>';
-        html += '</tr>';
-    }
-
-    html += '</tbody></table>';
-    tableArea.innerHTML = html;
-    document.getElementById('rowCount').textContent = data.length + ' rows';
-}
-
-function cellEdited(cell) {
-    var rowIndex = parseInt(cell.dataset.row);
-    var key = cell.dataset.key;
-    var newValue = cell.textContent;
-
-    currentData[rowIndex][key] = newValue;
-
-    var indicator = document.getElementById('savingIndicator');
-    indicator.style.display = 'inline';
-
-    clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(function() {
-        saveData();
-        indicator.style.display = 'none';
-    }, 800);
-}
-
-function saveData() {
-    fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: 'write', data: currentData })
-    })
-    .then(function(response) { return response.json(); })
-    .then(function(result) {
-        if (result.status === 'error') {
-            alert('Save failed: ' + result.message);
-        }
-    })
-    .catch(function(error) {
-        alert('Failed to save data. Please try again.');
-    });
-}
-
-function addRow() {
-    if (!currentData || currentData.length === 0) {
-        fetch(APPS_SCRIPT_URL + '?action=read')
-            .then(function(r) { return r.json(); })
-            .then(function(result) {
-                currentData = result.data;
-                columnHeaders = result.headers || [];
-                insertNewRow();
-            })
-            .catch(function() {
-                alert('Cannot add row. Please refresh the page.');
+            productsToRender.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-description">${product.description}</div>
+                    <div class="product-price">
+                        <span class="currency"></span>${product.price}
+                        ${product.period ? `<span style="font-size: 0.4em; color: #888;"> / ${product.period}</span>` : ''}
+                    </div>
+                    <a href="https://wa.me/${phoneNumber}?text=Hi, I'm interested in ${encodeURIComponent(product.name)}" class="dm-button" target="_blank">
+                        DM to Buy
+                    </a>
+                `;
+                grid.appendChild(card);
             });
-        return;
-    }
-    insertNewRow();
-}
-
-function insertNewRow() {
-    var keys;
-    if (currentData.length > 0) {
-        keys = Object.keys(currentData[0]);
-    } else if (columnHeaders.length > 0) {
-        keys = columnHeaders;
-    } else {
-        keys = ['Column1'];
-    }
-
-    var newRow = {};
-    for (var k = 0; k < keys.length; k++) {
-        newRow[keys[k]] = '';
-    }
-
-    currentData.push(newRow);
-    renderTable(currentData);
-    saveData();
-
-    setTimeout(function() {
-        var cells = document.querySelectorAll('td[contenteditable]');
-        if (cells.length >= keys.length) {
-            cells[cells.length - keys.length].focus();
         }
-    }, 100);
-}
 
-function deleteRow(index) {
-    if (!confirm('Are you sure you want to delete this row?')) return;
-    currentData.splice(index, 1);
-    renderTable(currentData);
-    saveData();
-}
+        searchInput.addEventListener("input", (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = products.filter(p =>
+                p.name.toLowerCase().includes(searchTerm) ||
+                p.description.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filtered);
+        });
 
-function reloadData() {
-    loadData();
-}
-
-function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-</script>
-
+        renderProducts(products);
+    </script>
 </body>
 </html>
